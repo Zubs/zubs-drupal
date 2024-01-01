@@ -55,8 +55,25 @@ class RSVPForm extends FormBase {
      * {@inheritdoc}
      */
     public function submitForm(array &$form, FormStateInterface $form_state) {
-        $email = $form_state->getValue('email');
-        $this->messenger()->addMessage(t('The form is working. You entered @entry', ['@entry' => $email]));
+        try {
+            $uid = Drupal::currentUser()->id();
+            $nid = $form_state->getValue('nid');
+            $email = $form_state->getValue('email');
+            $current_time = Drupal::time()->getRequestTime();
+
+            $query = Drupal::database()->insert('rsvplist');
+            $query->fields([
+                'nid' => $nid,
+                'uid' => $uid,
+                'mail' => $email,
+                'created' => $current_time,
+            ]);
+            $query->execute();
+
+            $this->messenger()->addMessage(t('Thank you for your RSVP, you are on the list for the event!'));
+        } catch (Exception $e) {
+            $this->messenger()->addError(t('Unable to RSVP at the time. Please try again.'));
+        }
     }
 
     /**
