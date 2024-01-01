@@ -33,7 +33,7 @@ class RSVPForm extends FormBase {
         $form['email'] = [
             '#type' => 'email',
             '#title' => $this->t('Email Address'),
-            '#size' => 25,
+            '#size' => 64,
             '#description' => t("We will send updates to the email address you provide"),
             '#required' => TRUE,
         ];
