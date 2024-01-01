@@ -4,10 +4,3 @@ rsvplist.admin_settings_link:
   route_name: rsvplist.admin_settings
   weight: 10
   parent: system.admin_config_content
-
-rsvplist.report_link:
-  title: 'List of RSVP Submissions'
-  description: 'View listing of all RSVPs'
-  route_name: rsvplist.report
-  weight: -5
-  parent: system.admin_reports

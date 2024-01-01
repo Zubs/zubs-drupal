@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * @file
+ * RSVPList module hooks.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function rsvplist_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+    $node = $form_state->getFormObject()->getEntity();
+    $current_node_type = $node->getType();
+    $rsvp_config = \Drupal::config('rsvplist.settings');
+    $allowed_types = $rsvp_config->get('allowed_types');
+
+    if (in_array($current_node_type, $allowed_types)) {
+        $form['rsvplist'] = [
+            '#type' => 'details',
+            '#title' => t('RSVP Configuration'),
+            '#access' => \Drupal::currentUser()->hasPermission('administer rsvplist'),
+            '#group' => 'advanced',
+            '#weight' => 50,
+        ];
+    }
+}
