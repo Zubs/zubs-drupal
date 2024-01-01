@@ -58,5 +58,15 @@ class RSVPForm extends FormBase {
         $email = $form_state->getValue('email');
         $this->messenger()->addMessage(t('The form is working. You entered @entry', ['@entry' => $email]));
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function validateForm(array &$form, FormStateInterface $form_state) {
+        $email = $form_state->getValue('email');
+        if (strpos($email, 'example.com') !== FALSE) {
+            $form_state->setErrorByName('email', t('We are not accepting example.com email addresses'));
+        }
+    }
 }
 
