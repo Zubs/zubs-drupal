@@ -6,11 +6,3 @@ mymodule.simplecontent:
   requirements:
     _permission: 'access content'
 
-mymodule.variableContent:
-  path: '/mymodule/variable-content/{name}/{job}'
-  defaults:
-    _controller: '\Drupal\mymodule\Controller\FirstController::variableContent'
-    _title: 'What does @name do?'
-  requirements:
-    _permission: 'access content'
-

@@ -14,4 +14,15 @@ class FirstController extends ControllerBase {
     public function simpleContent() {
         return [
             '#type' => 'markup',
-            '#markup' => t('Hello Drupal World. Time flies like an
+            '#markup' => t('Hello Drupal World. Time flies like an arrow, fruit flies like a banana'),
+        ];
+    }
+
+    public function variableContent($name, $job) {
+        return [
+            '#type' => 'markup',
+            '#markup' => t('@name is a @job', ['@name' => $name, '@job' => $job]),
+        ];
+    }
+}
+
