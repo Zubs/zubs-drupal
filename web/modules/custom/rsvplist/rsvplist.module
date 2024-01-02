@@ -19,7 +19,7 @@ function rsvplist_form_node_form_alter(&$form, FormStateInterface $form_state, $
     if (in_array($current_node_type, $allowed_types)) {
         $form['rsvplist'] = [
             '#type' => 'details',
-            '#title' => t('RSVP Configuration'),
+            '#title' => t('RSVP Collection'),
             '#access' => \Drupal::currentUser()->hasPermission('administer rsvplist'),
             '#group' => 'advanced',
             '#weight' => 50,
@@ -28,7 +28,7 @@ function rsvplist_form_node_form_alter(&$form, FormStateInterface $form_state, $
         $enabler = \Drupal::service('rsvplist.enabler');
         $form['rsvplist']['rsvplist_enabled'] = [
             '#type' => 'checkbox',
-            '#title' => t('Collect RSVP email address for this node'),
+            '#title' => t('Collect RSVP email addresses for this node'),
             '#default_value' => $enabler->isEnabled($node),
         ];
 
